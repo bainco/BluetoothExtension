@@ -1,7 +1,7 @@
 # BluetoothExtension
 This extension provides Bluetooth support to NetLogo using the BlueCove library and provides a similar interface used by the Arduino extension
 
-To add this extension, download the 2 jar files found under releases and put them in the extensions folder in NetLogo
+To add this extension, download the `bluetooth.zip` file found under releases and extract it, which will produce a bluetooth folder.   Put this folder (which contains 2 jar files) in the extensions folder of your NetLogo 6.x installation.
 
 ## Connecting to the computer
 Before using the Bluetooth extension, the bluetooth device must be connected your computer or else your devices can't be found in NetLogo.
