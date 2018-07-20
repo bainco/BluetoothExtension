@@ -6,10 +6,12 @@ To add this extension, download the 2 jar files found under releases and put the
 ## Connecting to the computer
 Before using the Bluetooth extension, the bluetooth device must be connected your computer or else your devices can't be found in NetLogo.
 ### Mac
+![](images/MacBluetooth.png)
 1. Go to System Preferences and click on "Bluetooth"
 2. Find your device on the list of Bluetooth devices and click connect
 3. Enter the passkey if needed
 ### Windows
+![](images/WindowsBluetooth.png)
 1. Open up Settings and click on "Bluetooth & other devices"
 2. Add a discoverable Bluetooth device and click connect
 3. Enter the passkey if needed and wait for Windows to say your device is ready to go
@@ -23,4 +25,4 @@ An example is provided in the sample folder.
 * `bluetooth:devices` is not a primitive, the equivalient of `arduino:ports` is `bluetooth:devices`
 * One must call `bluetooth:devices` in order to call `bluetooth:open` 
 * If you get a timeout for calling `bluetooth:open` on Mac, try reconnecting the Bluetooth device to your computer via System Preferences
-* If you get an error saying the you can't access the a port with `bluetooth:open` on Windows, try reconnecting the Bluetooth device to your computer
+* If you get an error saying the you can't access the a port with `bluetooth:open` on Windows, try reconnecting the Bluetooth device to your computer via Settings
