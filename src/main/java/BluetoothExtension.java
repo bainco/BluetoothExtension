@@ -77,12 +77,14 @@ public class BluetoothExtension extends DefaultClassManager {
                     "reporter:is-setup?",
                     "reporter:debug-to-bluetooth",
                     "reporter:debug-from-bluetooth",
+                    "reporter:get-previous-values",
                     "",
                     "command:open[DeviceName:String]",
                     "command:close",
                     "command:write-string[Message:String]",
                     "command:write-int[Message:int]",
-                    "command:write-byte[Message:byte]"};
+                    "command:write-byte[Message:byte]",
+                    "command:reset-previous-values"};
             for (String prim : prims) {
                 llist.add(prim);
             }
