@@ -19,7 +19,7 @@ Before using the Bluetooth extension, the bluetooth device must be connected you
 ## Converting code from the Arduino extension for the Bluetooth extension 
 The setup process for using the Bluetooth extension is fairly similar to the process of setting up the Arduino extension. If a project is already compatible with the Arduino extension, a find and replace of `arduino` to `bluetooth` will work for the most part.
 
-An example is provided in the sample folder.
+An example is provided of the Arduino sample project converted for the Bluetooth extension. The same Arduino sketch from the Arduino sample should be used for the Bluetooth example.
 
 ### Notes
 * `bluetooth:devices` is not a primitive, the equivalient of `arduino:ports` is `bluetooth:devices`
