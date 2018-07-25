@@ -1,3 +1,5 @@
+package bluetooth.interfaces;
+
 import java.util.List;
 
 public interface BluetoothManager {
@@ -10,7 +12,7 @@ public interface BluetoothManager {
     void close();
     void writeString(String input);
     void writeInt(int input);
-    BluetoothEventListener getBluetoothEventListener();
-    void setBluetoothEventListener(BluetoothEventListener newBluetoothEventListener);
+    bluetooth.interfaces.BluetoothEventListener getBluetoothEventListener();
+    void setBluetoothEventListener(bluetooth.interfaces.BluetoothEventListener newBluetoothEventListener);
     void cleanUp();
 }

@@ -1,3 +1,8 @@
+package bluetooth.implementation;
+
+import bluetooth.interfaces.BluetoothEventListener;
+import bluetooth.interfaces.BluetoothManager;
+
 import javax.bluetooth.*;
 import javax.microedition.io.Connector;
 import javax.microedition.io.StreamConnection;
