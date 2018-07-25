@@ -12,7 +12,7 @@ public class BluetoothExtension extends DefaultClassManager {
 
     public BluetoothExtension() throws ExtensionException {
         try {
-            manager = new BluetoothManager();
+            manager = new ConcreteBluetoothManager();
             manager.setBluetoothEventListener(new ConcreteBluetoothEventListener(values, inboundErrors, previousValues));
         } catch (BluetoothStateException e) {
             throw new ExtensionException("Bluetooth state exception : " + e.getMessage());
