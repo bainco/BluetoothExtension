@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.*;
 
-class ConcreteBluetoothManager implements BluetoothManager {
+public class ConcreteBluetoothManager implements BluetoothManager {
 
     private static final Object lock = new Object();
 
