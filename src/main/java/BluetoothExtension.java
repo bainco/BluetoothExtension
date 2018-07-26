@@ -1,8 +1,15 @@
+import bluetooth.implementation.BluetoothErrorRecord;
+import bluetooth.implementation.BluetoothValuePair;
+import bluetooth.interfaces.BluetoothEventListener;
+import bluetooth.interfaces.BluetoothManager;
 import org.nlogo.api.*;
 import org.nlogo.core.Syntax;
 import org.nlogo.core.SyntaxJ;
 
-import javax.bluetooth.BluetoothStateException;
+import java.io.File;
+import java.lang.reflect.Method;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.*;
 import java.util.concurrent.LinkedBlockingDeque;
 
@@ -10,23 +17,63 @@ public class BluetoothExtension extends DefaultClassManager {
 
     private BluetoothManager manager;
 
+    public static String PATH = System.getProperty("netlogo.extensions.dir", "extensions") + File.separator + "bluetooth" + File.separator;
+
     public BluetoothExtension() throws ExtensionException {
         try {
-            manager = new ConcreteBluetoothManager();
-            manager.setBluetoothEventListener(new ConcreteBluetoothEventListener(values, inboundErrors, previousValues));
-        } catch (BluetoothStateException e) {
-            throw new ExtensionException("Bluetooth state exception : " + e.getMessage());
+            String className = "bluetooth.implementation.ConcreteBluetoothManager";
+            File file = new File(PATH + "BluetoothImplementation.jar");
+            File file2 = new File(PATH + "BluetoothInterfaces.jar");
+            File file3 = new File(PATH + "bluecove-2.1.2.jar");
+
+            if (file.exists() && file2.exists() && file3.exists()) {
+                try {
+                    Class test = ClassLoader.getSystemClassLoader().loadClass("bluetooth.implementation.ConcreteBluetoothManager");
+                } catch (ClassNotFoundException ex) {
+                    ClassLoader cl = ClassLoader.getSystemClassLoader();
+                    if ( cl instanceof URLClassLoader ) {
+                        URLClassLoader ul = (URLClassLoader)cl;
+                        Class<?>[] paramTypes = new Class<?>[] { URL.class };
+                        try {
+                            Method method = null;
+                            method = URLClassLoader.class.getDeclaredMethod("addURL", paramTypes);
+                            method.setAccessible(true);
+                            method.invoke(ClassLoader.getSystemClassLoader(), file.toURI().toURL());
+                            method.invoke(ClassLoader.getSystemClassLoader(), file2.toURI().toURL());
+                            method.invoke(ClassLoader.getSystemClassLoader(), file3.toURI().toURL());
+                        } catch (Exception e1) {
+
+                        }
+                    } else {
+                        throw new ExtensionException("Extension exception : SystemClassLoader doesn't extend URLClassLoader");
+                    }
+                } finally {
+                    Class<?> concreteBluetoothManager = ClassLoader.getSystemClassLoader().loadClass("bluetooth.implementation.ConcreteBluetoothManager");
+                    Class<?> concreteBluetoothEventListener = ClassLoader.getSystemClassLoader().loadClass("bluetooth.implementation.ConcreteBluetoothEventListener");
+                    Object _manager = concreteBluetoothManager.newInstance();
+                    manager = (BluetoothManager)_manager;
+
+                    values = Collections.<String, Object>synchronizedMap(new HashMap<String, Object>());
+                    inboundErrors = new LinkedBlockingDeque<>();
+                    outboundMessages = new LinkedList<>();
+                    previousValues = new LinkedBlockingDeque<>();
+
+                    Object _listener = concreteBluetoothEventListener.getDeclaredConstructor(Map.class, Deque.class, Deque.class).newInstance(values, inboundErrors, previousValues);
+                    manager.setBluetoothEventListener((BluetoothEventListener) _listener);
+                }
+            }
+        } catch (Exception e) {
+            throw new ExtensionException("Extension exception : " + e.getMessage());
         }
     }
 
-    private Map<String, Object> values =
-            Collections.<String, Object>synchronizedMap(new HashMap<String, Object>());
+    private Map<String, Object> values = null;
 
-    private Deque<BluetoothErrorRecord> inboundErrors = new LinkedBlockingDeque<>();
+    private Deque<BluetoothErrorRecord> inboundErrors = null;
 
-    private LinkedList<String> outboundMessages = new LinkedList<>();
+    private LinkedList<String> outboundMessages = null;
 
-    private Deque<BluetoothValuePair> previousValues = new LinkedBlockingDeque<>();
+    private Deque<BluetoothValuePair> previousValues = null;
 
     private static void addMessage(LinkedList<String> messages, String messageType, String messageValue) {
         while (messages.size() >= 5) {
@@ -56,13 +103,8 @@ public class BluetoothExtension extends DefaultClassManager {
     @Override
     public void unload(ExtensionManager em) throws ExtensionException {
         super.unload(em);
-        System.gc();
         manager.cleanUp();
-        System.gc();
         manager = null;
-        for (int i = 0; i < 10; i++) {
-            System.gc();
-        }
     }
 
     public static class Primitives implements Reporter {
@@ -129,9 +171,9 @@ public class BluetoothExtension extends DefaultClassManager {
             _manager = manager;
         }
 
-        @Override
-        public void perform(Argument[] args, Context context) throws ExtensionException {
-            try {
+                @Override
+                public void perform(Argument[] args, Context context) throws ExtensionException {
+                    try {
                 boolean result = false;
                 result = _manager.openDevice(args[0].getString());
                 if (!result) {
@@ -387,16 +429,4 @@ public class BluetoothExtension extends DefaultClassManager {
             return SyntaxJ.commandSyntax();
         }
     }
-//    public static class GetDump implements Reporter {
-//
-//        @Override
-//        public Object report(Argument[] args, Context context) throws ExtensionException {
-//            return null;
-//        }
-//
-//        @Override
-//        public Syntax getSyntax() {
-//            return null;
-//        }
-//    }
 }

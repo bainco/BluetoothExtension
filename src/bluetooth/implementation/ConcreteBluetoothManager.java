@@ -372,6 +372,5 @@ public class ConcreteBluetoothManager implements BluetoothManager {
         deviceMap = null;
         devices = null;
         bluetoothEventListener = null;
-        System.gc();
     }
 }

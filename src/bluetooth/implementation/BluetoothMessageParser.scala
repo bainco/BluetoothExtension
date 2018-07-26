@@ -1,3 +1,5 @@
+package bluetooth.implementation;
+
 import scala.util.{ Either, Left, Try }
 import scala.annotation.tailrec
 

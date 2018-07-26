@@ -1,5 +1,9 @@
+package bluetooth.implementation;
+
 import java.util
 import java.util.{Deque, Map => JMap}
+
+import bluetooth.interfaces.BluetoothEventListener
 
 class ConcreteBluetoothEventListener(values: JMap[String, Object], inboundErrors: Deque[BluetoothErrorRecord], previousValues: Deque[BluetoothValuePair])
   extends BluetoothEventListener{
