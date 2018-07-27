@@ -21,6 +21,21 @@ The setup process for using the Bluetooth extension is fairly similar to the pro
 
 An example is provided of the Arduino sample project converted for the Bluetooth extension. The same Arduino sketch from the Arduino sample should be used for the Bluetooth example.
 
+## Primitives
+
+[`bluetooth:primitives`](#)
+[`bluetooth:devices`](#)
+[`bluetooth:open`](#)
+[`bluetooth:close`](#)
+[`bluetooth:get`](#)
+[`bluetooth:write-string`](#)
+[`bluetooth:write-int`](#)
+[`bluetooth:write-byte`](#)
+[`bluetooth:is-open?`](#)
+[`bluetooth:is-setup?`](#)
+[`bluetooth:get-previous-values?`](#)
+[`bluetooth:reset-previous-values?`](#)
+
 ### Notes
 * `bluetooth:devices` is not a primitive, the equivalient of `arduino:ports` is `bluetooth:devices`
 * One must call `bluetooth:devices` in order to call `bluetooth:open` 
