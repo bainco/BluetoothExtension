@@ -41,3 +41,6 @@ An example is provided of the Arduino sample project converted for the Bluetooth
 * One must call `bluetooth:devices` in order to call `bluetooth:open` 
 * If you get a timeout error for calling `bluetooth:open` on Mac, try reconnecting the Bluetooth device to your computer via System Preferences
 * If you get an error saying a socket operation was attempted to an unreachable network with `bluetooth:open` on Windows, try reconnecting the Bluetooth device to your computer via Settings
+
+### Sample Android App
+* Try sending sensor readings from your Android device using [this](https://rink.hockeyapp.net/apps/6d45cc61bdf64151889975a2722502d9) app!
