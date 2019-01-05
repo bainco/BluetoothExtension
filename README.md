@@ -37,7 +37,7 @@ An example is provided of the Arduino sample project converted for the Bluetooth
 [`bluetooth:reset-previous-values?`](#)
 
 ### Notes
-* `bluetooth:devices` is not a primitive, the equivalient of `arduino:ports` is `bluetooth:devices`
+* `bluetooth:ports` is not a primitive, the equivalient of `arduino:ports` is `bluetooth:devices`
 * One must call `bluetooth:devices` in order to call `bluetooth:open` 
 * If you get a timeout error for calling `bluetooth:open` on Mac, try reconnecting the Bluetooth device to your computer via System Preferences
 * If you get an error saying a socket operation was attempted to an unreachable network with `bluetooth:open` on Windows, try reconnecting the Bluetooth device to your computer via Settings
