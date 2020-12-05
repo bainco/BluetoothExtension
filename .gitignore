@@ -5,3 +5,4 @@
 /bluetooth.zip
 /*.jar
 .bundledFiles
+.metals/
